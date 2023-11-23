@@ -10,8 +10,8 @@ class FlightServer(flight.FlightServerBase):
         self._location = location
         self._schema = {
             'key': [], 'key_hash_val': [], 'is_primary': [], 'is_secondary': []}
-        initial_df = pd.DataFrame(self._schema)
-        self._data = pa.Table.from_pandas(initial_df)
+        self._initial_df = pd.DataFrame(self._schema)
+        self._data = pa.Table.from_pandas(self._initial_df)
 
     def do_put(self, context, descriptor, reader, writer):
         description = descriptor.path[0].decode('utf-8')
@@ -23,7 +23,7 @@ class FlightServer(flight.FlightServerBase):
             self._data = pa.Table.from_pandas(self._data.to_pandas()._append(data_to_insert, ignore_index=True))
 
         if description == "reset":
-            self._data = pa.Table.from_pandas(self._data)
+            self._data = pa.Table.from_pandas(self._initial_df)
 
         if description == "modify":
             request_data_table = reader.read_all()
@@ -53,6 +53,6 @@ class FlightServer(flight.FlightServerBase):
 
 
 if __name__ == '__main__':
-    server = FlightServer(location="grpc://0.0.0.0:8815")
+    server = FlightServer(location="grpc://0.0.0.0:7770")
     print("Starting the server on localhost:8815")
     server.serve()

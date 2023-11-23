@@ -3,6 +3,7 @@ import hashlib
 from pprint import pprint as pp
 
 from node import Node
+import pandas as pd
 
 
 def main():
@@ -35,7 +36,7 @@ def main():
         if not inserted:
             server_metadata[str(node_hashes[0])]["count"] += 1
 
-    # pp(server_metadata)
+    pp(server_metadata)
     # server_metadata_normalized = pd.json_normalize(server_metadata)
     # for hash_val, row in server_metadata_normalized.iterrows():
     #     print(row)
