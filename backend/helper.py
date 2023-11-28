@@ -1,15 +1,15 @@
-from pymongo import MongoClient
+import config as app_config
 from node import Node
 
-client = MongoClient("mongodb://localhost:27017/")
-cmpe273_db = client["cmpe273"]
+# client = MongoClient("mongodb://localhost:27017/")
+# cmpe273_db = client["cmpe273"]
 
 
 def update_hash_values():
     hash_ring_len = (2 ** 32) - 1
     node_client = Node(hash_ring_len)
 
-    cursor = cmpe273_db.servers.find({})
+    cursor = app_config.cmpe273_db.servers.find({})
     for rec in cursor:
         virtual_servers = list(rec["virtual_servers"])
         virtual_servers[0]["hash"] = node_client.generate_sha256_hash(
@@ -29,7 +29,7 @@ def update_hash_values():
         virtual_servers[7]["hash"] = node_client.generate_sha256_hash(
             rec["server_name"], f"{rec['physical_server_num']}_{virtual_servers[7]['virtual_server_num']}")
 
-        cmpe273_db.servers.update_one({"_id": rec["_id"]}, {"$set": {"virtual_servers": virtual_servers}})
+        app_config.cmpe273_db.servers.update_one({"_id": rec["_id"]}, {"$set": {"virtual_servers": virtual_servers}})
 
 
 update_hash_values()
