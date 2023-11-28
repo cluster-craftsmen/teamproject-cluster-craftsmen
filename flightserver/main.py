@@ -13,7 +13,10 @@ class FlightServer(flight.FlightServerBase):
     def __init__(self, location, **kwargs):
         super().__init__(location, **kwargs)
         self._location = location
-        self._data = pa.Table.from_schema(self._schema)
+        self._data = pa.Table.from_batches([pa.RecordBatch.from_arrays(
+            [pa.array([], type=field.type) for field in self._schema],
+            schema=self._schema
+        )])
 
     def do_put(self, context, descriptor, reader, writer):
         description = descriptor.path[0].decode('utf-8')
@@ -24,7 +27,10 @@ class FlightServer(flight.FlightServerBase):
                 self._data = pa.concat_tables([self._data, data_table])
 
             elif description == "reset":
-                self._data = pa.Table.from_schema(self._schema)
+                self._data = pa.Table.from_batches([pa.RecordBatch.from_arrays(
+                    [pa.array([], type=field.type) for field in self._schema],
+                    schema=self._schema
+                )])
 
             elif description == "modify":
                 request_data_table = reader.read_all()
