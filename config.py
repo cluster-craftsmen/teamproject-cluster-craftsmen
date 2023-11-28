@@ -1,11 +1,13 @@
 from pymongo import MongoClient
 
-# mongodb_username = "cmpe202"
-# mongodb_password = "m5mg84zEtM0le7J9"
-# mongo_uri = "mongodb+srv://{0}:{1}@cmpe202.2pmv4sg.mongodb.net/".format(
-#     mongodb_username, mongodb_password)
+mongodb_username = "cmpe273"
+mongodb_password = "BmnVjvshPsET48ej"
+mongo_uri = f"mongodb+srv://{mongodb_username}:{mongodb_password}@cmpe273finalproject.lxfgnam.mongodb.net/"
 
-client = MongoClient("mongodb://localhost:27017/")
+# client = MongoClient("mongodb://localhost:27017/")
+# cmpe273_db = client["cmpe273"]
+
+client = MongoClient(mongo_uri)
 cmpe273_db = client["cmpe273"]
 
 server_mapping = {
