@@ -7,8 +7,7 @@ from bson import ObjectId
 from flask import Flask, jsonify, request
 
 import config as app_config
-from common import (get_server_metadata, get_comprehensive_server_metadata, insert_data_into_flight_server,
-                    update_data_into_flight_server)
+from common import (get_server_metadata, get_comprehensive_server_metadata, insert_data_into_flight_server)
 
 app = Flask(__name__)
 hash_ring_len = (2 ** 32) - 1
