@@ -44,7 +44,6 @@ const BarGraph: React.FC = () => {
   return (
     <div>
       <div className="card">
-        {serverData.length > 0 ? (
           <Chart
             type="bar"
             data={{
@@ -64,11 +63,6 @@ const BarGraph: React.FC = () => {
             }}
             options={basicOptions}
           />
-        ) : (
-          <div style={{ padding: '20px', textAlign: 'center' }}>
-            No data available to display.
-          </div>
-        )}
       </div>
     </div>
   );
