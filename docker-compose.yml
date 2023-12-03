@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   flightserver1:
@@ -20,3 +20,9 @@ services:
     image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:pr-2
     ports:
       - "7773:8815"
+
+  # web:
+  #   container_name: frontend
+  #   image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fe:pr-5
+  #   ports:
+  #     - 8080:80
