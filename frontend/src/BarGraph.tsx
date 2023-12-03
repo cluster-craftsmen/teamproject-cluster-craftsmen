@@ -40,6 +40,7 @@ const BarGraph: React.FC = () => {
   };
 
   const { basicOptions } = getLightTheme();
+  const labels = serverData.map(server => server.server_name);
 
   return (
     <div>
@@ -47,7 +48,7 @@ const BarGraph: React.FC = () => {
           <Chart
             type="bar"
             data={{
-              labels: ['Server 1', 'Server 2', 'Server 3', 'Server 4'], 
+              labels: labels, 
               datasets: [
                 {
                   label: 'Primary Data',

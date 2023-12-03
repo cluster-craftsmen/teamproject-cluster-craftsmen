@@ -3,6 +3,7 @@ import React, { createContext, useContext, ReactNode, useState } from 'react';
 interface ServerData {
   primary_data_count: number;
   secondary_data_count: number;
+  server_name: string;
 }
 
 interface ChartDataContextProps {

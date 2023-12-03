@@ -1,5 +1,5 @@
 import { Box, TextInput, Group, Button } from "@mantine/core";
-import React, { FormEvent } from "react";
+import  { FormEvent } from "react";
 import { useChartData } from "./ChartDataContext";
 
 export default function DataInput() {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Notification, rem } from "@mantine/core";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { useChartData } from "./ChartDataContext";
