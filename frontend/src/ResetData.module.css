@@ -1,0 +1,12 @@
+.runningLine {
+    height: 2px;
+    background: teal;
+    width: 0;
+    animation: runningLineAnimation 3s linear forwards;
+}
+
+@keyframes runningLineAnimation {
+    to {
+        width: 100%;
+    }
+}

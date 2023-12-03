@@ -102,7 +102,7 @@ def get_data():
             "secondary_data_count": 0,
         }
         op.append(result)
-
+    print(op)
     return jsonify(op)
 
 
