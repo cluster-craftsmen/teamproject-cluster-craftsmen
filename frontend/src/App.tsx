@@ -7,6 +7,7 @@ import DataInput from "./DataInput";
 import ServersList from "./ServersList";
 import BarGraph from "./BarGraph";
 import ResetData from "./ResetData";
+import { ChartDataProvider } from './ChartDataContext';
 
 
 export default function App() {
@@ -16,10 +17,12 @@ export default function App() {
       <Title>
         Consistent Hashing
       </Title>
+      <ChartDataProvider>
       <DataInput/>
       <ServersList/>
       <BarGraph/>
       <ResetData/>
+      </ChartDataProvider>
     </MantineProvider>
 
   )
