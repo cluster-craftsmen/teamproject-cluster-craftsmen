@@ -1,17 +1,16 @@
-// DataInput.tsx
 import { Box, TextInput, Group, Button } from "@mantine/core";
 import React, { FormEvent } from "react";
-import { useChartData } from './ChartDataContext';
+import { useChartData } from "./ChartDataContext";
 
 export default function DataInput() {
-  const { setChartData } = useChartData();
+  const { fetchAndUpdateServerData } = useChartData();
 
   const onEnterData = async (e: FormEvent) => {
     e.preventDefault();
     const data: any = {
-      records_count: +(document.getElementById("count") as HTMLInputElement)?.value,
+      records_count: +(document.getElementById("count") as HTMLInputElement)
+        ?.value,
     };
-    console.log(data);
     try {
       const response = await fetch("/api/insert_records", {
         method: "POST",
@@ -23,6 +22,7 @@ export default function DataInput() {
 
       if (response.ok) {
         console.log("Data submitted successfully");
+        await fetchAndUpdateServerData();
       } else {
         console.error("Error submitting data");
       }
@@ -35,7 +35,11 @@ export default function DataInput() {
     <>
       <Box maw={340} mx="auto">
         <form onSubmit={onEnterData}>
-          <TextInput label="Enter Data Count" id="count" placeholder="Example: 10000" />
+          <TextInput
+            label="Enter Data Count"
+            id="count"
+            placeholder="Example: 10000"
+          />
           <Group justify="flex-end" mt="md">
             <Button type="submit">Submit</Button>
           </Group>
