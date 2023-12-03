@@ -21,8 +21,14 @@ services:
     ports:
       - "7773:8815"
 
-  # web:
-  #   container_name: frontend
-  #   image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fe:pr-5
-  #   ports:
-  #     - 8080:80
+  frontend:
+    container_name: frontend
+    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fe:pr-5
+    ports:
+      - 8080:80
+
+  backend:
+    container_name: backend
+    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-be:pr-5
+    ports:
+     - 5012:5012
