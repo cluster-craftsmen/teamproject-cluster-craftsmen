@@ -73,6 +73,7 @@ def get_data():
     op = []
     phy_server_metadata, vir_server_metadata, _ = get_comprehensive_server_metadata()
 
+    physical_server_names = ["S1", "S2", "S3", "S4"]
     for srv_name in phy_server_metadata:
         conn_string = app_config.server_mapping[srv_name]["connection_string"]
 
@@ -86,8 +87,22 @@ def get_data():
             "secondary_data_count": sum(df["is_secondary"]),
         }
         op.append(result)
+
+        try:
+            physical_server_names.remove(srv_name)
+        except ValueError:
+            print("Do Nothing")
+
         client.close()
 
+    for srv_name_ in physical_server_names:
+        result = {
+            "server_name": srv_name_,
+            "primary_data_count": 0,
+            "secondary_data_count": 0,
+        }
+        op.append(result)
+    print(op)
     return jsonify(op)
 
 
