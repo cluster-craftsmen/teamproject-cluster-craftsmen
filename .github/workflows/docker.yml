@@ -23,6 +23,10 @@ jobs:
         include:
           - dockerfile: ./fs.Dockerfile
             image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs
+          - dockerfile: ./fe.Dockerfile
+            image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fe
+          - dockerfile: ./be.Dockerfile
+            image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-be
     steps:
       - name: Checkout
         uses: actions/checkout@v4

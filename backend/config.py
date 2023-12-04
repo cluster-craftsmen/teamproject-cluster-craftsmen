@@ -11,15 +11,15 @@ cmpe273_db = client["cmpe273"]
 
 server_mapping = {
     "S1": {
-        "connection_string": "grpc://0.0.0.0:7770"
+        "connection_string": "grpc://flightserver1:8815"
     },
     "S2": {
-        "connection_string": "grpc://0.0.0.0:7771"
+        "connection_string": "grpc://flightserver2:8815"
     },
     "S3": {
-        "connection_string": "grpc://0.0.0.0:7772"
+        "connection_string": "grpc://flightserver3:8815"
     },
     "S4": {
-        "connection_string": "grpc://0.0.0.0:7773"
+        "connection_string": "grpc://flightserver4:8815"
     }
 }
