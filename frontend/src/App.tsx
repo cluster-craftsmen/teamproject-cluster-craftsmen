@@ -5,13 +5,13 @@ import DataInput from "./DataInput";
 import ServersList from "./ServersList";
 import BarGraph from "./BarGraph";
 import ResetData from "./ResetData";
-import { ChartDataProvider } from './ChartDataContext';
+import { ChartDataProvider } from "./ChartDataContext";
 
 export default function App() {
   return (
     <MantineProvider theme={theme}>
-      <Title order={1} orderMd={2} align="center">
-        Consistent Hashing For Apache Arrow Flight
+      <Title order={1}>
+        Consistent Hashing using Apache Arrow Flight
       </Title>
       <ChartDataProvider>
         <DataInput />
