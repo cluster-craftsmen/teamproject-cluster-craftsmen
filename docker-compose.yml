@@ -3,36 +3,36 @@ version: "3"
 services:
   flightserver1:
     container_name: flightserver1
-    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:pr-5
+    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:develop
     ports:
       - "7770:8815"
 
   flightserver2:
     container_name: flightserver2
-    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:pr-5
+    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:develop
     ports:
       - "7771:8815"
 
   flightserver3:
     container_name: flightserver3
-    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:pr-5
+    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:develop
     ports:
       - "7772:8815"
 
   flightserver4:
     container_name: flightserver4
-    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:pr-5
+    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fs:develop
     ports:
       - "7773:8815"
 
   frontend:
     container_name: frontend
-    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fe:pr-5
+    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-fe:develop
     ports:
       - 8080:80
 
   backend:
     container_name: backend
-    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-be:pr-5
+    image: ghcr.io/cluster-craftsmen/teamproject-cluster-craftsmen-be:develop
     ports:
      - 5012:5012
