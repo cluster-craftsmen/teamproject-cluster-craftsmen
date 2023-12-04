@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Notification } from '@mantine/core';
+import { Switch, Notification } from '@mantine/core';
+import { useChartData } from './ChartDataContext';
 
 interface ServerToggleProps {
   serverName: string;
@@ -8,9 +9,16 @@ interface ServerToggleProps {
 const ServerToggle: React.FC<ServerToggleProps> = ({ serverName }) => {
   const [isServerEnabled, setIsServerEnabled] = useState(true);
   const [notification, setNotification] = useState<string | null>(null);
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const { fetchAndUpdateServerData } = useChartData();
 
   const handleToggle = async () => {
     try {
+      if (isNotificationVisible) {
+        // If notification is visible, don't toggle
+        return;
+      }
+
       const apiUrl = isServerEnabled ? '/api/disable_server' : '/api/add_server';
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -26,6 +34,15 @@ const ServerToggle: React.FC<ServerToggleProps> = ({ serverName }) => {
         const message = `Server ${serverName} has been ${action} successfully`;
 
         setNotification(message);
+        setIsNotificationVisible(true);
+
+        // Fetch and update server data after toggling the server
+        await fetchAndUpdateServerData();
+
+        setTimeout(() => {
+          setNotification(null);
+          setIsNotificationVisible(false);
+        }, 3000);
 
         console.log(message);
       } else {
@@ -36,23 +53,22 @@ const ServerToggle: React.FC<ServerToggleProps> = ({ serverName }) => {
     }
   };
 
-  const handleCloseNotification = () => {
-    setNotification(null);
-  };
-
   return (
     <div style={{ marginBottom: '20px' }}>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
         <span style={{ marginRight: '10px' }}>{serverName}</span>
-        <Button onClick={handleToggle} variant={isServerEnabled ? 'filled' : 'light'}>
-          {isServerEnabled ? 'Disable' : 'Enable'}
-        </Button>
+        <Switch
+          checked={isServerEnabled}
+          onChange={handleToggle}
+          color={isServerEnabled ? 'teal' : 'red'}
+          disabled={isNotificationVisible}
+        />
       </div>
       {notification && (
         <Notification
           title={notification}
-          onClose={handleCloseNotification}
-          color="teal"
+          onClose={() => setNotification(null)}
+          color={isServerEnabled ? 'teal' : 'red'}
           style={{ marginTop: '10px' }}
         />
       )}
@@ -72,4 +88,3 @@ const ServersList: React.FC = () => {
 };
 
 export default ServersList;
-
