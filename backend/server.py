@@ -27,7 +27,17 @@ def insert_records():
         for k in range(len(node_hashes)):
             if node_hashes[k] <= key_hash <= node_hashes[(k + 1) % len(node_hashes)]:
                 primary_server_hash = str(node_hashes[(k + 1) % len(node_hashes)])
+                primary_server_name = server_metadata[primary_server_hash]["server_name"]
+
                 secondary_server_hash = str(node_hashes[(k + 2) % len(node_hashes)])
+                secondary_server_name = server_metadata[secondary_server_hash]["server_name"]
+                count, max_count = 0, 8
+                index = k + 3
+                while (secondary_server_name == primary_server_name) and (count < max_count):
+                    secondary_server_hash = str(node_hashes[index % len(node_hashes)])
+                    secondary_server_name = server_metadata[secondary_server_hash]["server_name"]
+                    index += 1
+                    count += 1
 
                 for server_hash in [primary_server_hash, secondary_server_hash]:
                     if server_hash not in data:
@@ -44,13 +54,24 @@ def insert_records():
             helper_server_hash_list = []
 
             primary_server_hash = str(node_hashes[0 % len(node_hashes)])
+            primary_server_name = server_metadata[primary_server_hash]["server_name"]
             helper_server_hash_list.append(primary_server_hash)
 
             if (1 % len(node_hashes)) != 0:
                 secondary_server_hash = str(node_hashes[1 % len(node_hashes)])
+                secondary_server_name = server_metadata[secondary_server_hash]["server_name"]
+                count, max_count = 0, 8
+                index = 2
+                while (secondary_server_name == primary_server_name) and (count < max_count):
+                    secondary_server_hash = str(node_hashes[index % len(node_hashes)])
+                    secondary_server_name = server_metadata[secondary_server_hash]["server_name"]
+                    index += 1
+                    count += 1
+
                 helper_server_hash_list.append(secondary_server_hash)
             else:
-                helper_server_hash_list = str("")
+                print("Do Nothing")
+                # helper_server_hash_list = str("")
 
             for server_hash in helper_server_hash_list:
                 if server_hash not in data:
@@ -153,7 +174,16 @@ def add_server():
         for k in range(len(node_hashes)):
             if node_hashes[k] <= key_hash <= node_hashes[(k + 1) % len(node_hashes)]:
                 primary_server_hash = str(node_hashes[(k + 1) % len(node_hashes)])
+                primary_server_name = vir_server_metadata_updated[primary_server_hash]["server_name"]
                 secondary_server_hash = str(node_hashes[(k + 2) % len(node_hashes)])
+                secondary_server_name = vir_server_metadata_updated[secondary_server_hash]["server_name"]
+                count, max_count = 0, 8
+                index = k + 3
+                while (secondary_server_name == primary_server_name) and (count < max_count):
+                    secondary_server_hash = str(node_hashes[index % len(node_hashes)])
+                    secondary_server_name = vir_server_metadata_updated[secondary_server_hash]["server_name"]
+                    index += 1
+                    count += 1
 
                 for server_hash in [primary_server_hash, secondary_server_hash]:
                     if server_hash not in data:
@@ -170,13 +200,24 @@ def add_server():
             helper_server_hash_list = []
 
             primary_server_hash = str(node_hashes[0 % len(node_hashes)])
+            primary_server_name = vir_server_metadata_updated[primary_server_hash]["server_name"]
             helper_server_hash_list.append(primary_server_hash)
 
             if (1 % len(node_hashes)) != 0:
                 secondary_server_hash = str(node_hashes[1 % len(node_hashes)])
+                secondary_server_name = vir_server_metadata_updated[secondary_server_hash]["server_name"]
+                count, max_count = 0, 8
+                index = 2
+                while (secondary_server_name == primary_server_name) and (count < max_count):
+                    secondary_server_hash = str(node_hashes[index % len(node_hashes)])
+                    secondary_server_name = vir_server_metadata_updated[secondary_server_hash]["server_name"]
+                    index += 1
+                    count += 1
+
                 helper_server_hash_list.append(secondary_server_hash)
             else:
-                helper_server_hash_list = str("")
+                print("Do Nothing")
+                # helper_server_hash_list = str("")
 
             for server_hash in helper_server_hash_list:
                 if server_hash not in data:
@@ -241,7 +282,17 @@ def disable_server():
         for k in range(len(node_hashes)):
             if node_hashes[k] <= key_hash <= node_hashes[(k + 1) % len(node_hashes)]:
                 primary_server_hash = str(node_hashes[(k + 1) % len(node_hashes)])
+                primary_server_name = vir_server_metadata_updated[primary_server_hash]["server_name"]
+
                 secondary_server_hash = str(node_hashes[(k + 2) % len(node_hashes)])
+                secondary_server_name = vir_server_metadata_updated[secondary_server_hash]["server_name"]
+                count, max_count = 0, 8
+                index = k + 3
+                while (secondary_server_name == primary_server_name) and (count < max_count):
+                    secondary_server_hash = str(node_hashes[index % len(node_hashes)])
+                    secondary_server_name = vir_server_metadata_updated[secondary_server_hash]["server_name"]
+                    index += 1
+                    count += 1
 
                 for server_hash in [primary_server_hash, secondary_server_hash]:
                     if server_hash not in data:
@@ -258,13 +309,24 @@ def disable_server():
             helper_server_hash_list = []
 
             primary_server_hash = str(node_hashes[0 % len(node_hashes)])
+            primary_server_name = vir_server_metadata_updated[primary_server_hash]["server_name"]
             helper_server_hash_list.append(primary_server_hash)
 
             if (1 % len(node_hashes)) != 0:
                 secondary_server_hash = str(node_hashes[1 % len(node_hashes)])
+                secondary_server_name = vir_server_metadata_updated[secondary_server_hash]["server_name"]
+                count, max_count = 0, 8
+                index = 2
+                while (secondary_server_name == primary_server_name) and (count < max_count):
+                    secondary_server_hash = str(node_hashes[index % len(node_hashes)])
+                    secondary_server_name = vir_server_metadata_updated[secondary_server_hash]["server_name"]
+                    index += 1
+                    count += 1
+
                 helper_server_hash_list.append(secondary_server_hash)
             else:
-                helper_server_hash_list = str("")
+                print("Do Nothing")
+                # helper_server_hash_list = str("")
 
             for server_hash in helper_server_hash_list:
                 if server_hash not in data:
