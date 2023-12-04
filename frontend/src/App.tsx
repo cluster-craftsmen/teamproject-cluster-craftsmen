@@ -5,7 +5,8 @@ import DataInput from "./DataInput";
 import ServersList from "./ServersList";
 import BarGraph from "./BarGraph";
 import ResetData from "./ResetData";
-import { ChartDataProvider } from "./ChartDataContext";
+import { ChartDataProvider } from './ChartDataContext';
+
 
 export default function App() {
   return (
