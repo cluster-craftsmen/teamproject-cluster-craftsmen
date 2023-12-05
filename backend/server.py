@@ -1,5 +1,5 @@
 import hashlib
-
+import os
 import pandas as pd
 import pyarrow as pa
 import pyarrow.flight as flight
@@ -15,13 +15,23 @@ hash_ring_len = (2 ** 32) - 1
 
 @app.route('/api/insert_records', methods=['POST'])
 def insert_records():
-    val = request.get_json()
-    records_count = val["records_count"]
+    # val = request.get_json()
+    # records_count = val["records_count"]
+
+    file = request.files['file']
+    dir_path = os.path.dirname(__file__)
+    file_path = os.path.join(dir_path, file.filename)
+    file.save(file_path)
+
+    df = pd.read_csv(file_path)
+
     server_metadata, node_hashes = get_server_metadata()
 
     data = {}
-    for i in range(records_count):
-        unique_id = str(ObjectId())
+    # for i in range(records_count):
+    for idx, row in df.iterrows():
+        # unique_id = str(ObjectId())
+        unique_id = str(row["id"])
         key_hash = int(hashlib.sha256(f"{unique_id}".encode()).hexdigest(), 16) % hash_ring_len
         inserted = False
         for k in range(len(node_hashes)):
@@ -86,6 +96,11 @@ def insert_records():
         conn_string = app_config.server_mapping[srv_name]["connection_string"]
         insert_data_into_flight_server(conn_string, server_data)
 
+    try:
+        os.remove(file_path)
+    except Exception as e:
+        print(str(e))
+    
     return jsonify({"message": "Data Insertion Successful"})
 
 
