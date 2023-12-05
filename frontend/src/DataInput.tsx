@@ -1,5 +1,5 @@
-import { Box, TextInput, Group, Button } from "@mantine/core";
-import  { FormEvent } from "react";
+import { Box, Group, Button } from "@mantine/core";
+import { FormEvent } from "react";
 import { useChartData } from "./ChartDataContext";
 
 export default function DataInput() {
@@ -7,44 +7,40 @@ export default function DataInput() {
 
   const onEnterData = async (e: FormEvent) => {
     e.preventDefault();
-    const data: any = {
-      records_count: +(document.getElementById("count") as HTMLInputElement)
-        ?.value,
-    };
-    try {
-      const response = await fetch("/api/insert_records", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+    const formData = new FormData();
+    const fileInput = document.getElementById("file-input") as HTMLInputElement;
 
-      if (response.ok) {
-        console.log("Data submitted successfully");
-        await fetchAndUpdateServerData();
-      } else {
-        console.error("Error submitting data");
+    if (fileInput.files && fileInput.files[0]) {
+      formData.append("file", fileInput.files[0]);
+
+      try {
+        const response = await fetch("/api/insert_records", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          console.log("File submitted successfully");
+          await fetchAndUpdateServerData();
+        } else {
+          console.error("Error submitting file");
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
+    } else {
+      console.error("No file selected");
     }
   };
 
   return (
-    <>
-      <Box maw={340} mx="auto">
-        <form onSubmit={onEnterData}>
-          <TextInput
-            label="Enter Data Count"
-            id="count"
-            placeholder="Example: 10000"
-          />
-          <Group justify="flex-end" mt="md">
-            <Button type="submit">Submit</Button>
-          </Group>
-        </form>
-      </Box>
-    </>
+    <Box maw={340} mx="auto">
+      <form onSubmit={onEnterData}>
+        <input type="file" id="file-input" />
+        <Group justify="flex-end" mt="md">
+          <Button type="submit">Submit File</Button>
+        </Group>
+      </form>
+    </Box>
   );
 }
